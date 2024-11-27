@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.cdnfonts.com/css/itc-kabel-std" rel="stylesheet">
+  <title>으아아......</title>
+</head>
+<body>
+  <div class="container">
+    <h1>3월 전국연합학력평가</h1>
+    <p id="countdown"></p>
+  </div>
+</body>
+</html>
+
+<style>
+body {
+  background-image: url(./crystallize.jpg);
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  position: relative;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+h1, #countdown {
+  position: relative;
+  z-index: 1; 
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#countdown {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+</style>
+
+<script>
+const targetDateKST = new Date(Date.UTC(2025, 3, 25, 23, 40, 0));
+
+function updateCountdownKST() {
+  const nowUTC = new Date();
+  const nowKST = new Date(nowUTC.getTime() + 9 * 60 * 60 * 1000);
+  const difference = targetDateKST - nowKST;
+
+  if (difference <= 0) {
+    document.getElementById("countdown").innerText = "D-Day가 지났습니다!";
+    return;
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerText =
+    `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다.`;
+}
+
+setInterval(updateCountdownKST, 1000);
+
+updateCountdownKST();
+</script>
